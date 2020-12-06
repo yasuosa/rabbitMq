@@ -1,0 +1,42 @@
+server:
+  port: 8080
+
+
+spring:
+  rabbitmq:
+    username: user
+    password: 123456
+    virtual-host: /taobao
+    host: 123.56.139.62
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    listener:
+      direct:
+        acknowledge-mode: manual
+      simple:
+        acknowledge-mode: manual
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/taobao?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    username: root
+    password: 123456
+    #注入数据源的类型   默认的为HikariDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #      filters: log4j,stat
+      max-active: 20
+      min-idle: 5
+      validation-query: select x
+      initial-size: 3
+      max-wait: 5000
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+    banner: true
+  mapper-locations: classpath:/mapper/*Mapper.xml
+
+
